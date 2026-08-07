@@ -1,3 +1,11 @@
+# -- ATIVIDADE DE REVISÃO DE LAÇOS FOR --
+# Respostas das questões:
+#   1. Resultado: 6
+#  2.  A falta do passo -1.
+
+
+
+# Resposta da número 3:
 gols = 0
 
 partidas_sem_gols = 0
