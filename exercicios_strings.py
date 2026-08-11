@@ -27,8 +27,8 @@ ano = data_nascimento[6:]
 
 
 print(f"Dia:", dia)
-print("Mês:", mes)
-print("Ano:", ano)
+print(f"Mês:", mes)
+print(f"Ano:", ano)
 
 
 # Atividade 3 - Criador de Nome de Usuário
