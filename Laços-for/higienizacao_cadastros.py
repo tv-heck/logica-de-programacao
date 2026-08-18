@@ -11,8 +11,8 @@ print(f"E-mail oficial: {email.lower().strip()}")
 cpf = " 123.456.789-00 "
 telefone = " (11) 99999-8888"
 
-print(f"CPF padronizado: {cpf.strip().replace(".", "").replace("-", "")}")
-print(f"Número de telefone padronizado: {telefone.strip().replace("(", "").replace(")", "").replace("-", "")}")
+print(f"CPF padronizado: {cpf.strip().replace(".", "").replace("-", "").replace(" ", "")}")
+print(f"Número de telefone padronizado: {telefone.strip().replace("(", "").replace(")", "").replace("-", "").replace(" ", "")}")
 
 # Atividade 3 - Código de Estoque
 
