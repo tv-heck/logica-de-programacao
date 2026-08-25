@@ -27,4 +27,4 @@ print("Citação bibliográfica:", citacao_formatada)  # Saída esperada: "DOS S
 ano_matricula = 2024
 cpf_aluno = "123.456.789-00"
 codigo_gerado = gerar_codigo(ano_matricula, cpf_aluno)
-print("Matrícula gerada:", codigo_gerado)  # Saída esperada: "ALU-2024-123"
+print("Matrícula gerada:", codigo_gerado)  # Saída esperada: "ALU-2024-123" 
