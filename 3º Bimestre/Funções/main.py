@@ -1,43 +1,76 @@
-# AV2 - Sistema de RH de Empresa de Vendas
+# ==============================================================================
+# PROVA PRÁTICA AV2 - 3º BIMESTRE
+# ARQUIVO: av2_sistema_modular.py
+# Nome do Aluno: 
+# Data: 
+# Link do Repositório: 
+# ==============================================================================
 
-nomes_vendedores = ["João", "Maria", "Pedro", "Ana", "Lucas"]
-nome_verificado = []
-
-
-def verificar_nome(nome, vendedores):
-    """Retorna o nome padronizado se ele estiver cadastrado."""
-    nome_normalizado = nome.strip().casefold()
-    for vendedor in vendedores:
-        if vendedor.casefold() == nome_normalizado:
-            return vendedor
-    return None
-
-
-def bater_meta(vendas, meta, salario_base):
-    salario_base = 2000  # Salário base do vendedor
-    if vendas >= meta:
-        bonus = 0.30 * salario_base
-        salario_final = salario_base + bonus
-        return salario_final
-    else:
-        return salario_base
-
-def main_relatorio(bater_meta, vendas, meta, salario_base, nome_verificado):
-    if nome_verificado:
-        print("\n--- Relatório do Trimestre ---")
-        print(f"\nVendedor: {nome_verificado} ")
-        print(f"Vendas realizadas: {vendas}")
-        print(f"Meta de vendas: {meta}")
-        salario_final = bater_meta(vendas, meta, salario_base)
-        print(f"Salário final do vendedor: R${salario_final:.2f}")
-        if vendas >= meta:
-                print("Parabéns! Você atingiu a meta de vendas e recebeu um bônus!")
-        else:
-                print("Que pena. Talvez da próxima vez?")
+# Lista inicial de dados brutos (Exemplo: Sistema de RH / Atendimento)
+# Os dados estão no formato: "nome_completo;cargo_ou_setor;telefone_ou_cpf"
+dados_brutos = [
+   "  carlos eduardo silva;desenvolvedor;11988887777  ",
+   "  ana paula mendes;analista de rh;21977776666  ",
+   "  roberto carlos oliveira;gerente de projetos;31966665555  ",
+   "  pedro henrique da silva;diretor de operações;11955542222  ",
+   "  joão g. silva;estagiário;4899924444  ",
+   "  luca b. santos;auditor;11988883333  "
+]
 
 
-relatorio = input("Deseja gerar o relatório do trimestre? (s/n): ")
-if relatorio.lower() == 's':
-    nome_verificado = verificar_nome(nome_verificado, nomes_vendedores)
-    main_relatorio(bater_meta, vendas=15000, meta=10000, salario_base=2000, nome_verificado=nome_verificado)
-    print("\n--- Relatório do Trimestre ---")
+# ------------------------------------------------------------------------------
+# 1. FUNÇÕES DO SISTEMA (Mínimo de 3 funções)
+# ------------------------------------------------------------------------------
+
+def limpar_e_formatar_texto(texto):
+   """
+   FUNÇÃO 1:
+   - Deve receber uma string.
+   - Deve remover espaços extras das pontas (.strip()).
+   - Deve converter o texto para letras MAIÚSCULAS (.upper()).
+   - Retorna o texto devidamente formatado.
+   """
+   texto = texto.strip().upper()
+   return texto
+
+
+def extrair_codigo_ou_ddd(dado):
+   dado = dado.strip()
+   return dado[0:2]
+
+
+def processar_e_exibir_cadastros(lista_dados):
+   total = 0
+   for dado in lista_dados:
+      partes = dado.split(";")
+      nome = limpar_e_formatar_texto(partes[0])
+      cargo = limpar_e_formatar_texto(partes[1])
+      ddd = extrair_codigo_ou_ddd(partes[2])
+      print(f"Nome: {nome}, Cargo: {cargo}, DDD: {ddd}")
+      total += 1
+   return total
+
+
+# ------------------------------------------------------------------------------
+# 2. PROGRAMA PRINCIPAL (FLUXO DE EXECUÇÃO)
+# ------------------------------------------------------------------------------
+
+def main():
+   print("==================================================")
+   print("     SISTEMA DE GESTÃO MODULARIZADO - AV2        ")
+   print("==================================================\n")
+
+   print("Iniciando o processamento dos dados...\n")
+   total_processado = processar_e_exibir_cadastros(dados_brutos)
+   # TODO: Exiba uma mensagem final mostrando a quantidade total de registros processados.
+
+   print(f"\nTotal de registros processados: {total_processado}")
+
+   print("\n==================================================")
+   print("             PROCESSAMENTO CONCLUÍDO              ")
+   print("==================================================")
+
+
+# Execução do programa
+if __name__ == "__main__":
+   main()
