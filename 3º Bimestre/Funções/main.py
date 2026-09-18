@@ -1,9 +1,9 @@
 # ==============================================================================
 # PROVA PRÁTICA AV2 - 3º BIMESTRE
 # ARQUIVO: av2_sistema_modular.py
-# Nome do Aluno: 
-# Data: 
-# Link do Repositório: 
+# Nome do Aluno: Thiago Viel Heck
+# Data: 18/09/2026
+# Link do Repositório: https://github.com/tv-heck/logica-de-programacao
 # ==============================================================================
 
 # Lista inicial de dados brutos (Exemplo: Sistema de RH / Atendimento)
