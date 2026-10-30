@@ -34,6 +34,5 @@ usuario = {
 }
 
 print("=== Perfil do Usuário ===")
-print(f"Nome: {usuario['nome']}")
-print(f"Nível: {usuario['nivel']}")
-print(f"Ativo: {usuario['ativo']}")
+print(f"Categorias: {usuario.keys()}")
+print(f"Valores: {usuario.values()}")
