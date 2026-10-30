@@ -18,17 +18,19 @@ print(f"Estoque: {produto['estoque']}")
 
 produto["preco"] = 220.0
 produto["categoria"] = "Periféricos"
+produto["estoque"] += 6  # Adicionando 6 unidades ao estoque
 
 print("=== Produto atualizado ===")
 print(produto)
 print(f"Categoria: {produto['categoria']}")
 print(f"Código: {produto['codigo']}")
 print(f"Nome: {produto['nome']}")
+print(f"Novo estoque: {produto['estoque']}")
 
 # Atividade 3 - Perfil de Usuário e Métodos de Inspeção
 
 usuario = {
-    "nome": "Carlos Eduardo",
+    "nome": "Brian",
     "nivel": "Administrador",
     "ativo": True
 }
