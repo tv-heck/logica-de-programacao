@@ -1,9 +1,13 @@
+# Atividade 1 - Acervo inicial
+
 acervo = [
     {"codigo": 101, "titulo": "Quarta Asa", "autor": "Rebecca Yarros", "paginas": 400, "disponivel": True},
     {"codigo": 104, "titulo": "Corte de Espinhos e Rosas", "autor": "Sarah J. Maas", "paginas": 464, "disponivel": True},
     {"codigo": 203, "titulo": "O Senhor dos Anéis", "autor": "J.R.R. Tolkein", "paginas": 1200, "disponivel": True},
     {"codigo": 501, "titulo": "Épico de Gilgamesh", "autor": "Desconhecido/Tradição Oral", "paginas": 300, "disponivel": False},
 ]
+
+# Atividade 2 - Adicionar novo livro no acervo
 
 novo_livro = {
     "codigo": 502,
@@ -14,6 +18,8 @@ novo_livro = {
 }
 
 acervo.append(novo_livro)
+
+# Atividade 3 - Listar livros usanço for e if e booleano
 
 for livro in acervo:
     if livro["disponivel"] == True and livro["paginas"] > 250:
@@ -32,6 +38,8 @@ if flag:
 else:
     print("O livro de código 104 não foi encontrado.")
 
+
+# Atividade 4 - Empréstimo de livro
 
 emprestimo = input("Deseja realizar um empréstimo? (S/N): ").strip().upper()
 
