@@ -28,6 +28,16 @@ def cadastrar(lista):
     print(f'Livro "{titulo}" cadastrado com sucesso.')
 
 
+def exibir_menu():
+    print("\n=== Sistema da Biblioteca ===")
+    print("1. Cadastrar livro")
+    print("2. Listar livros")
+    print("3. Buscar livro por título")
+    print("4. Remover livro")
+    print("5. Sair")
+    return input("Escolha uma opção (1-5): ").strip()
+
+
 def listar(lista):
     if not lista:
         print("Não há livros cadastrados.")
@@ -57,6 +67,11 @@ def buscar_e_exibir(lista):
         return
 
     titulo = input("Digite o título do livro: ").strip()
+
+    if titulo == "":
+        print("Título inválido: digite um título.")
+        return
+
     indice = buscar(lista, titulo)
 
     if indice == -1:
@@ -64,10 +79,12 @@ def buscar_e_exibir(lista):
         return
 
     livro = lista[indice]
+    disponibilidade = "Sim" if livro["disponivel"] else "Não"
     print(
         f'Título: {livro["titulo"]} | '
         f'Autor: {livro["autor"]} | '
-        f'Ano: {livro["ano"]}'
+        f'Ano: {livro["ano"]} | '
+        f'Disponível: {disponibilidade}'
     )
 
 
@@ -88,35 +105,31 @@ def remover(lista):
 
 
 inicializar_sistema = input("Deseja inicializar o sistema? (s/n): ").strip().lower()
-if inicializar_sistema == "n":
+
+if inicializar_sistema == "s":
+    while True:
+        opcao = exibir_menu()
+
+        if opcao not in ["1", "2", "3", "4", "5"]:
+            print("Opção inválida. Tente novamente.")
+            continue
+
+        if opcao == "1":
+            cadastrar(acervo_biblioteca)
+        elif opcao == "2":
+            listar(acervo_biblioteca)
+        elif opcao == "3":
+            buscar_e_exibir(acervo_biblioteca)
+        elif opcao == "4":
+            remover(acervo_biblioteca)
+        elif opcao == "5":
+            print("Saindo do sistema. Até logo!")
+            break
+elif inicializar_sistema == "n":
     print("Sistema não inicializado. Encerrando o programa.")
     exit()
 
-if not inicializar_sistema == "s" or not inicializar_sistema == "n":
+else: 
     print("Opção inválida. Tente novamente.")
     inicializar_sistema = input("Deseja inicializar o sistema? (s/n): ").strip().lower()
 
-while inicializar_sistema == "s":
-    opcao = input("Escolha uma opção (1-5): ").strip()
-    print("\n=== Sistema da Biblioteca ===")
-    print("1. Cadastrar livro")
-    print("2. Listar livros")
-    print("3. Buscar livro por título")
-    print("4. Remover livro")
-    print("5. Sair")
-
-    if opcao not in ["1", "2", "3", "4", "5"]:
-        print("Opção inválida. Tente novamente.")
-        continue
-    if opcao == "1":
-        cadastrar(acervo_biblioteca)
-    elif opcao == "2":
-        listar(acervo_biblioteca)
-    elif opcao == "3":
-        buscar_e_exibir(acervo_biblioteca)
-    elif opcao == "4":
-        remover(acervo_biblioteca)
-    elif opcao == "5":
-        print("Saindo do sistema. Até logo!")
-        break
-    
