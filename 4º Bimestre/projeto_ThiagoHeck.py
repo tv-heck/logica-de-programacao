@@ -2,72 +2,121 @@ acervo_biblioteca = [
     {"titulo": "Duna", "autor": "Frank Herbert", "ano": 1965, "disponivel": True},
     {"titulo": "O Alquimista", "autor": "Paulo Coelho", "ano": 1988, "disponivel": True},
     {"titulo": "1984", "autor": "George Orwell", "ano": 1949, "disponivel": False},
-                     ]
+]
 
-inicializar_sistema = input("Deseja inicializar o sistema? (S/N): ").strip().upper()
 
-if inicializar_sistema == "S":
-    print("\n Bem vindo ao sistema da biblioteca! \n")
-    print("1. Listar livros disponíveis")
-    print("2. Cadastrar novo livro")
-    print("3. Buscar livro por título")
-    print("4. Realizar empréstimo de livro")
-    print("5. Transferir livro para outro acervo")
-    print("6. Sair do sistema")
 
-opcao = input("Escolha uma opção (1-6): ").strip()
-if opcao == "1":
-    print("\n Livros disponíveis: \n")
-    for livro in acervo_biblioteca:
-        if livro["disponivel"]:
-            print(f'Título: {livro["titulo"]}, Autor: {livro["autor"]}, Ano: {livro["ano"]}')
+def cadastrar(lista):
+    titulo = input("Título: ").strip()
+    autor = input("Autor: ").strip()
+    ano_texto = input("Ano de publicação: ").strip()
 
-elif opcao == "2":
+    if not titulo or not autor or not ano_texto:
+        print("Todos os campos são obrigatórios.")
+        return
+
+    if not ano_texto.isdigit():
+        print("Ano inválido: digite um número.")
+        return
+
+    lista.append({
+        "titulo": titulo,
+        "autor": autor,
+        "ano": int(ano_texto),
+        "disponivel": True,
+    })
+    print(f'Livro "{titulo}" cadastrado com sucesso.')
+
+
+def listar(lista):
+    if not lista:
+        print("Não há livros cadastrados.")
+        return
+
+    print("\nLivros cadastrados:")
+    for livro in lista:
+        disponibilidade = "Sim" if livro["disponivel"] else "Não"
+        print(
+            f'Título: {livro["titulo"]} | '
+            f'Autor: {livro["autor"]} | '
+            f'Ano: {livro["ano"]} | '
+            f'Disponível: {disponibilidade}'
+        )
+
+
+def buscar(lista, titulo):
+    for indice, livro in enumerate(lista):
+        if livro["titulo"].lower() == titulo.lower():
+            return indice
+    return -1
+
+
+def buscar_e_exibir(lista):
+    if not lista:
+        print("Não há livros cadastrados para buscar.")
+        return
+
     titulo = input("Digite o título do livro: ").strip()
-    autor = input("Digite o autor do livro: ").strip()
-    ano = int(input("Digite o ano de publicação do livro: ").strip())
-    novo_livro = {"titulo": titulo, "autor": autor, "ano": ano, "disponivel": True}
-    acervo_biblioteca.append(novo_livro)
-    print(f'\n Livro "{titulo}" cadastrado com sucesso! \n')
+    indice = buscar(lista, titulo)
 
-elif opcao == "3":
-    titulo_busca = input("Digite o título do livro que deseja buscar:" ).strip()
-    encontrado = False
-    for livro in acervo_biblioteca:
-        if livro["titulo"].lower() == titulo_busca.lower():
-            print(f'Título: {livro["titulo"]}, Autor: {livro["autor"]}, Ano: {livro["ano"]}')
-            encontrado = True
-        elif type(livro["titulo"]) is not str:
-            print(f'\n ERRO: O título do livro deve ser texto! \n')
-            encontrado = False
-    if not encontrado:
-        print(f'\n Livro "{titulo_busca}" não encontrado! \n')
+    if indice == -1:
+        print("Livro não encontrado.")
+        return
 
-elif opcao == "4":
-    titulo_emprestimo = input("Digite o título do livro que deseja emprestar: ").strip()
-    for livro in acervo_biblioteca:
-        if livro["titulo"].lower() == titulo_emprestimo.lower():
-            if livro["disponivel"]:
-                livro["disponivel"] = False
-                print(f'\n Empréstimo do livro "{titulo_emprestimo}" realizado com sucesso! \n')
-            else:
-                print(f'\n O livro "{titulo_emprestimo}" não está disponível para empréstimo. \n')
-            break
-    else:
-        print(f'\n Livro "{titulo_emprestimo}" não encontrado! \n')
-elif opcao == "5":
+    livro = lista[indice]
+    print(
+        f'Título: {livro["titulo"]} | '
+        f'Autor: {livro["autor"]} | '
+        f'Ano: {livro["ano"]}'
+    )
 
-    titulo_transferencia = input("Digite o título do livro que deseja transferir: ").strip()
-    for livro in acervo_biblioteca:
-        if livro["titulo"].lower() == titulo_transferencia.lower():
-            acervo_biblioteca.remove(livro)
-            print(f'\n Livro "{titulo_transferencia}" transferido para outro acervo com sucesso! \n')
-            break
-    else:
-        print(f'\n Livro "{titulo_transferencia}" não encontrado! \n')
 
-elif opcao == "6":
-    print("\n Saindo do sistema. Até logo! \n")
+def remover(lista):
+    if not lista:
+        print("Não há livros cadastrados para remover.")
+        return
+
+    titulo = input("Digite o título do livro que deseja remover: ").strip()
+    indice = buscar(lista, titulo)
+
+    if indice == -1:
+        print("Livro não encontrado.")
+        return
+
+    livro_removido = lista.pop(indice)
+    print(f'Livro "{livro_removido["titulo"]}" removido com sucesso.')
+
+
+inicializar_sistema = input("Deseja inicializar o sistema? (s/n): ").strip().lower()
+if inicializar_sistema == "n":
+    print("Sistema não inicializado. Encerrando o programa.")
+    exit()
+
+if not inicializar_sistema == "s" or not inicializar_sistema == "n":
+    print("Opção inválida. Tente novamente.")
+    inicializar_sistema = input("Deseja inicializar o sistema? (s/n): ").strip().lower()
+
+while inicializar_sistema == "s":
+    opcao = input("Escolha uma opção (1-5): ").strip()
+    print("\n=== Sistema da Biblioteca ===")
+    print("1. Cadastrar livro")
+    print("2. Listar livros")
+    print("3. Buscar livro por título")
+    print("4. Remover livro")
+    print("5. Sair")
+
+    if opcao not in ["1", "2", "3", "4", "5"]:
+        print("Opção inválida. Tente novamente.")
+        continue
+    if opcao == "1":
+        cadastrar(acervo_biblioteca)
+    elif opcao == "2":
+        listar(acervo_biblioteca)
+    elif opcao == "3":
+        buscar_e_exibir(acervo_biblioteca)
+    elif opcao == "4":
+        remover(acervo_biblioteca)
+    elif opcao == "5":
+        print("Saindo do sistema. Até logo!")
+        break
     
-else:
-    print("\n Opção inválida! Por favor, escolha uma opção entre 1 e 6. \n")
