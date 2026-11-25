@@ -11,12 +11,12 @@ def cadastrar(lista):
     autor = input("Autor: ").strip()
     ano_texto = input("Ano de publicação: ").strip()
 
-    if not titulo or not autor or not ano_texto:
-        print("Todos os campos são obrigatórios.")
+    if not titulo.isalpha() or not autor.isalpha() or not ano_texto.isdigit():
+        print("Erro: título, autor ou ano inválido.")
         return
 
-    if not ano_texto.isdigit():
-        print("Ano inválido: digite um número.")
+    if titulo == "" or autor == "" or ano_texto == "":
+        print("Erro: algum campo está nulo.")
         return
 
     lista.append({
@@ -68,7 +68,7 @@ def buscar_e_exibir(lista):
 
     titulo = input("Digite o título do livro: ").strip()
 
-    if titulo == "":
+    if titulo == "" or not titulo.isalpha():
         print("Título inválido: digite um título.")
         return
 
@@ -95,6 +95,10 @@ def remover(lista):
 
     titulo = input("Digite o título do livro que deseja remover: ").strip()
     indice = buscar(lista, titulo)
+
+    if titulo == "" or not titulo.isalpha():
+        print("Título inválido: digite um título.")
+        return
 
     if indice == -1:
         print("Livro não encontrado.")
